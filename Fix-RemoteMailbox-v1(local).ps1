@@ -1,4 +1,4 @@
-function Fix-Mailbox {
+function Fix-RemoteMailbox {
     param ($MailUser
     )
 Connect-ExchangeOnline
