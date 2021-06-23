@@ -11,6 +11,12 @@ $RemoteAddress = "$MailUser@contoso.mail.onmicrosoft.com"
 
 $PrimarySMTP = "$MailUser@contoso.com"
 
+Set-ADUser $MailUser -Add @{proxyAddress="smtp:"+"$RemoteAddress"}
+
+Write-Output "Please wait, configuration in progress"
+
+Start-Sleep -Seconds 30
+
 Invoke-Command -ConfigurationName Microsoft.Exchange -ConnectionUri http://exch.contoso.com/Powershell -ScriptBlock {Enable-RemoteMailbox "$Using:MailUser" -RemoteRoutingAddress "$Using:RemoteAddress" -PrimarySmtpAddress "$Using:PrimarySMTP"} | Out-Null
 
 Start-Sleep -Seconds 5
