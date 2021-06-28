@@ -9,9 +9,13 @@ Disconnect-ExchangeOnline -confirm:$false -InformationAction Ignore -ErrorAction
 
 $RemoteAddress = "$MailUser@contoso.mail.onmicrosoft.com"
 
+$OnMSAddress = "$MailUser@contoso.onmicrosoft.com"
+
 $PrimarySMTP = "$MailUser@contoso.com"
 
 Set-ADUser $MailUser -Add @{proxyAddress="smtp:"+"$RemoteAddress"}
+
+Set-ADUser $MailUser -Add @{proxyAddress="smtp:"+"$OnMSAddress"}
 
 Write-Output "Please wait, configuration in progress"
 
